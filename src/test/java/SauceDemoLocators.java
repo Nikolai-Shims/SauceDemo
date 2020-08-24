@@ -1,10 +1,12 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SauceDemoLocators {
@@ -108,6 +110,14 @@ public class SauceDemoLocators {
         driver.findElement(By.xpath("//*[text()= '<- Back']")).click();
         driver.findElement(By.xpath("//*[text() = 'REMOVE']"));
 
+    }
+
+    @Test
+    public void InventoryToLog(){
+       List<WebElement> one = driver.findElements(By.cssSelector(".inventory_item"));
+        System.out.println(one.size());
+        System.out.println(one.get(3).findElement(By.id("item_5_title_link")).getText());
+        System.out.println(one.get(3).findElement(By.cssSelector(".inventory_item_price")).getText());
     }
 
 
