@@ -2,54 +2,61 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CheckoutPage extends BasePage{
-    public CheckoutPage(WebDriver driver){
+public class CheckoutPage extends BasePage {
+
+    public static final By FIRST_NAME_CHECKOUT = By.id("first-name");
+    public static final By LAST_NAME_CHECKOUT = By.id("last-name");
+    public static final By ZIP_CODE_CHECKOUT = By.id("postal-code");
+    public static final By CHECKOUT_BUTTON = By.cssSelector(".btn_action.checkout_button");
+    public static final By CANCEL_BUTTON = By.cssSelector(".cart_cancel_link.btn_secondary");
+    public static final By CONTINUE_BUTTON = By.cssSelector(".btn_primary.cart_button");
+    public static final By FINISH_BUTTON = By.cssSelector(".btn_action.cart_button");
+    public static final By ERROR_MESSAGE = By.cssSelector("[data-test=error]");
+    public static final By CONFIRMATION_TEXT = By.cssSelector(".complete-header");
+
+    public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
-    public void buttonCheckout(){
-        driver.findElement(By.cssSelector(".btn_action.checkout_button")).click();
+    public void clickCheckout() {
+        driver.findElement(CHECKOUT_BUTTON).click();
     }
 
-    public void buttonCancel(){
-        driver.findElement(By.cssSelector(".cart_cancel_link.btn_secondary")).click();
+    public void clickCancel() {
+        driver.findElement(CANCEL_BUTTON).click();
     }
 
-    public void buttonContinue(){
-        driver.findElement(By.cssSelector(".btn_primary.cart_button")).click();
+    public void clickFinish() {
+        driver.findElement(FINISH_BUTTON).click();
     }
 
-    public void logInToCheckout(String firstName,String lastName,String zipCode){
+    public void clickContinue() {
+        driver.findElement(CONTINUE_BUTTON).click();
+    }
+
+    public void fillCheckoutInformation(String firstName, String lastName, String zipCode) {
         driver.findElement(FIRST_NAME_CHECKOUT).sendKeys(firstName);
         driver.findElement(LAST_NAME_CHECKOUT).sendKeys(lastName);
         driver.findElement(ZIP_CODE_CHECKOUT).sendKeys(zipCode);
     }
 
-    public void errorMessageEmptyField(){
-        String errorText =  driver.findElement(By.cssSelector("[data-test=error]")).getText();
-        Assert.assertEquals(errorText,"Error: First Name is required");
+    public String validateErrorMessage() {
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 
-    public void errorMessageEmptyLastName(){
-        String errorText =  driver.findElement(By.cssSelector("[data-test=error]")).getText();
-        Assert.assertEquals(errorText,"Error: Last Name is required");
+    public String validateOrderCompletion() {
+        String text = driver.findElement(CONFIRMATION_TEXT).getText();
+        return text;
     }
 
-    public void errorMessageEmptyZipCode(){
-        String errorText =  driver.findElement(By.cssSelector("[data-test=error]")).getText();
-        Assert.assertEquals(errorText,"Error: Postal Code is required");
+    public void isCheckoutPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(CONTINUE_BUTTON));
     }
 
-
-    public void buttonFinish(){
-        driver.findElement(By.cssSelector(".btn_action.cart_button")).click();
-    }
-
-    public void finish(){
-        String text = driver.findElement(By.cssSelector(".complete-header")).getText();
-        Assert.assertEquals(text,"THANK YOU FOR YOUR ORDER");
+    public void isCheckoutOverviewOpened() {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(FINISH_BUTTON));
     }
 
 }

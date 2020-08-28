@@ -3,30 +3,40 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
-public class CartPage extends BasePage{
-    public CartPage(WebDriver driver){
+public class CartPage extends BasePage {
+
+    public static final By BUTTON_CONTINUE_SHOPPING = By.cssSelector(".btn_secondary");
+    public static final By NUMBER_OF_ITEM = By.cssSelector(".fa-layers-counter.shopping_cart_badge");
+    public static final By ITEM_BY_CART = By.cssSelector(".cart_item");
+
+    public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openCart(){
-        driver.findElement(By.id("shopping_cart_container")).click();
+    public void openPage() {
+        driver.get("https://www.saucedemo.com/cart.html");
     }
 
-    public void getCountItemInToCart(){
-        List<WebElement> item=  driver.findElements(By.cssSelector(".cart_item"));
+    public String getCountItemInsideCart() {
+        List<WebElement> item = driver.findElements(ITEM_BY_CART);
         String countItem = String.valueOf(item.size());
-
-
-        String number = driver.findElement(By.cssSelector(".fa-layers-counter.shopping_cart_badge")).getText();
-        Assert.assertEquals(number,countItem);
-
+        return countItem;
     }
 
-    public void buttonContinueShopping(){
-        driver.findElement(By.cssSelector(".btn_secondary")).click();
+    public String getCountItemByShoppingCartBadge() {
+        String number = driver.findElement(NUMBER_OF_ITEM).getText();
+        return number;
+    }
+
+    public void clickContinueShopping() {
+        driver.findElement(BUTTON_CONTINUE_SHOPPING).click();
+    }
+
+    public void isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(BUTTON_CONTINUE_SHOPPING));
     }
 }
