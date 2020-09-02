@@ -1,30 +1,35 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class HeaderTest extends BaseTest {
 
-    @Test
-    public void validateBurgerMenu() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.clickAddToCart("Test.allTheThings() T-Shirt (Red)");
-        headerPage.clickBurgerMenu();
-        headerPage.clickResetState();
-        cartPage.openPage();
-        cartPage.isPageOpened();
-        Assert.assertEquals(cartPage.getCountItemInsideCart(), "0");
-        headerPage.clickBurgerMenu();
-        headerPage.clickAllItems();
-        productsPage.isPageOpened();
-        headerPage.clickBurgerMenu();
-        headerPage.clickAbout();
-        headerPage.navigateBack();
-        headerPage.clickBurgerMenu();
-        headerPage.clickLogout();
-
+    @Test()
+    public void validateBurgerMenu() throws InterruptedException {
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .clickButtonAddToCart("Test.allTheThings() T-Shirt (Red)");
+        assertEquals(headerPage.getCountItemByShoppingCartBadge(), "1");
+        headerPage
+                .clickBurgerMenu()
+                .clickResetState()
+                .closeBurgerMenu()
+                .openCartByBadge()
+                .isPageOpened();
+        assertEquals(cartPage.getCountItemInsideCart(), "0");
+        headerPage
+                .clickBurgerMenu()
+                .clickAllItems()
+                .isPageOpened();
+        headerPage
+                .clickBurgerMenu()
+                .clickLogout()
+                .isPageOpened();
     }
 
 }

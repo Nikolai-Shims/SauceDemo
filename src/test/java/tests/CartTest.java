@@ -1,49 +1,44 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class CartTest extends BaseTest {
 
     @Test
     public void logInToCart() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        cartPage.openPage();
-        cartPage.isPageOpened();
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened();
+        cartPage
+                .openPage();
     }
 
     @Test
     public void clickButtonContinue() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        cartPage.openPage();
-        cartPage.clickContinueShopping();
-        productsPage.isPageOpened();
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened();
+        cartPage
+                .openPage()
+                .clickContinueShopping()
+                .isPageOpened();
     }
 
     @Test
     public void addItemToCartAndValidate() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.clickAddToCart("Sauce Labs Bike Light");
-        productsPage.clickAddToCart("Sauce Labs Bolt T-Shirt");
-        cartPage.openPage();
-        cartPage.isPageOpened();
-        Assert.assertEquals(cartPage.getCountItemInsideCart(), cartPage.getCountItemByShoppingCartBadge());
-    }
-
-    @Test
-    public void dfsfwefew(){
-        loginPage.openPage();
-        loginPage.login(USERNAME,PASSWORD);
-        cartPage.openPage();
-        System.out.println(cartPage.getCountItemInsideCart());
-
-
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .clickButtonAddToCart("Sauce Labs Bike Light")
+                .clickButtonAddToCart("Sauce Labs Bolt T-Shirt");
+        cartPage
+                .openPage();
+        assertEquals(cartPage.getCountItemInsideCart(), headerPage.getCountItemByShoppingCartBadge());
     }
 
 }

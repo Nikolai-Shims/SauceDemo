@@ -7,49 +7,54 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ProductsPage extends BasePage {
 
-    public static final By BACK_BUTTON = By.cssSelector(".inventory_details_back_button");
     public static final By SORT_MENU = By.cssSelector(".product_sort_container");
-
     String addButton = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//*[text()='ADD TO CART']";
-    String removeButton = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//*[text()='%s']";
+    String removeButton = "//*[contains(text(),'%s')]/ancestor::div[@class='inventory_item']//*[text()='REMOVE']";
     String goToItemByLink = "//*[contains(text(),'%s')]/ancestor::a[@href]";
     String goToItemByImage = "//*[contains(text(), '%s')]/ancestor::div[@class='inventory_item']//img[@src]";
-
 
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-
-    public void goToItemByLink(String nameItem) {
+    public ItemPage goToItemByLink(String nameItem) {
         driver.findElement(By.xpath(String.format(goToItemByLink, nameItem))).click();
+        return new ItemPage(driver);
     }
 
-    public void goToItemByImage(String nameItem) {
+    public ItemPage goToItemByImage(String nameItem) {
         driver.findElement(By.xpath(String.format(goToItemByImage, nameItem))).click();
+        return new ItemPage(driver);
     }
 
-    public void clickBack() {
-        driver.findElement(BACK_BUTTON).click();
-    }
-
-    public void sortMenu(String sortByText) {
+    public ProductsPage sortMenu(String sortByText) {
         Select select = new Select(driver.findElement(SORT_MENU));
         select.selectByVisibleText(sortByText);
+        return this;
     }
 
-    public void clickAddToCart(String productName) {
+    public ProductsPage clickButtonAddToCart(String productName) {
         driver.findElement(By.xpath(String.format(addButton, productName))).click();
+        return this;
     }
 
-    public void checkButtonRemoveWithProductPage(String productName, String nameButton) {
-        driver.findElement(By.xpath(String.format(removeButton, productName, nameButton))).click();
+    public ProductsPage clickButtonRemoveFromCart(String productName) {
+        driver.findElement(By.xpath(String.format(removeButton, productName))).click();
+        return this;
     }
 
-    public void isPageOpened() {
+    @Override
+    public ProductsPage isPageOpened() {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(SORT_MENU));
+        return this;
     }
 
+    @Override
+    public ProductsPage openPage() {
+        driver.get("https://www.saucedemo.com/inventory.html");
+        isPageOpened();
+        return this;
+    }
 
 }
 

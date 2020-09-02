@@ -2,52 +2,61 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 public class ProductsTest extends BaseTest {
 
 
     @Test
     public void selectItemByName() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.goToItemByLink("Sauce Labs Bolt T-Shirt");
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .goToItemByLink("Sauce Labs Bolt T-Shirt")
+                .isPageOpened();
     }
 
     @Test
     public void selectItemByImage() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.goToItemByImage("Sauce Labs Bolt T-Shirt");
-
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .goToItemByImage("Sauce Labs Bolt T-Shirt")
+                .isPageOpened();
     }
 
     @Test
     public void changeSorting() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.sortMenu("Price (high to low)");
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .sortMenu("Price (high to low)")
+                .isPageOpened();
     }
 
     @Test
-    public void buttonAddToCartRemove() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.clickAddToCart("Sauce Labs Bolt T-Shirt");
-        productsPage.checkButtonRemoveWithProductPage("Sauce Labs Bolt T-Shirt", "REMOVE");
+    public void AddItemToCartAndRemoveIt() {
+        loginPage
+                .openPage()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened()
+                .clickButtonAddToCart("Sauce Labs Bolt T-Shirt");
+        String getCountItem = cartPage
+                .openPage()
+                .getCountItemInsideCart();
+        assertEquals(getCountItem, "1");
+        productsPage
+                .openPage()
+                .clickButtonRemoveFromCart("Sauce Labs Bolt T-Shirt");
+        String countItem = cartPage
+                .openPage()
+                .getCountItemInsideCart();
+        assertEquals(countItem, "0");
     }
 
-    @Test
-    public void validateButtonBack() {
-        loginPage.openPage();
-        loginPage.login(USERNAME, PASSWORD);
-        productsPage.isPageOpened();
-        productsPage.goToItemByLink("Sauce Labs Bolt T-Shirt");
-        productsPage.clickBack();
-        productsPage.isPageOpened();
-    }
 
 }
 

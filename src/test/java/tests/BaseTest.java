@@ -17,6 +17,8 @@ public class BaseTest {
     CartPage cartPage;
     CheckoutPage checkoutPage;
     HeaderPage headerPage;
+    ItemPage itemPage;
+    OverviewPage overviewPage;
 
     @BeforeMethod
     public void before() {
@@ -27,6 +29,8 @@ public class BaseTest {
         cartPage = new CartPage(driver);
         checkoutPage = new CheckoutPage(driver);
         headerPage = new HeaderPage(driver);
+        itemPage = new ItemPage(driver);
+        overviewPage = new OverviewPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
