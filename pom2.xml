@@ -12,7 +12,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <seleniumVersion>3.141.59</seleniumVersion>
         <testNgVersion>7.1.0</testNgVersion>
-        <mavenSureFirePlugin>3.0.0-M4</mavenSureFirePlugin>
     </properties>
 
     <build>
@@ -22,26 +21,26 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${mavenSureFirePlugin}</version>
+                    <version>3.0.0-M4</version>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M4</version>
 
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                    <version>3.0.0-M4</version>-->
+                    <configuration>
+                                                <suiteXmlFiles>
+                                                    <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                                                </suiteXmlFiles>
+                    </configuration>
 
-<!--                    <configuration>-->
-<!--                        <suiteXmlFiles>-->
-<!--                            <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
-<!--                        </suiteXmlFiles>-->
-<!--                    </configuration>-->
-
-<!--                </plugin>-->
+                </plugin>
 
             </plugins>
         </pluginManagement>
     </build>
+
 
 
     <dependencies>
