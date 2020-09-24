@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -7,7 +8,8 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(description = "Tест на логин")
+    @Description("Логин использует стандартные имя юзера и пароль")
     public void correctLogin() {
         loginPage
                 .openPage()

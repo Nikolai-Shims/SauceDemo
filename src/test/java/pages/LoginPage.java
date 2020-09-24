@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,6 +29,7 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    @Step("")
     public ProductsPage login(String username, String password) {
         loginWithoutRedirect(username, password);
         return new ProductsPage(driver);
