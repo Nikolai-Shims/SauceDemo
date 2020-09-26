@@ -23,6 +23,7 @@ public class HeaderTest extends BaseTest {
         assertEquals(headerPage.getCountItemByShoppingCartBadge(), "1");
         headerPage
                 .clickBurgerMenu()
+                .isPageOpened()
                 .clickResetState()
                 .closeBurgerMenu()
                 .isPageOpened();
