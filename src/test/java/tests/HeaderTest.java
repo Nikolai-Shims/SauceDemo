@@ -13,7 +13,7 @@ public class HeaderTest extends BaseTest {
     @Test(description = "Validate Burger Menu")
     @Description("Check all function in Burger Menu")
     @Issue("shim_nikolai")
-    public void validateBurgerMenu(){
+    public void validateBurgerMenu() {
         loginPage
                 .openPage()
                 .isPageOpened()
@@ -25,17 +25,41 @@ public class HeaderTest extends BaseTest {
                 .clickBurgerMenu()
                 .clickResetState()
                 .closeBurgerMenu()
-                .openCartByBadge()
+                .isPageOpened();
+        cartPage
+                .openPage()
                 .isPageOpened();
         assertEquals(cartPage.getCountItemInsideCart(), "0");
+    }
+
+    @Test(description = "Go to all items")
+    @Description("Go to 'Products page' from cart by 'Burger menu'")
+    @Issue("shim_nikolai")
+    public void switchingAllItem() {
+    cartPage
+            .openPage()
+            .isPageOpened();
         headerPage
                 .clickBurgerMenu()
+                .isPageOpened()
                 .clickAllItems()
-                .isPageOpened();
-        headerPage
-                .clickBurgerMenu()
-                .clickLogout()
                 .isPageOpened();
     }
 
+
+    @Test(description = "Logout")
+    @Description("Login and Log out")
+    @Issue("shim_nikolai")
+    public void logOut() {
+        loginPage
+                .openPage()
+                .isPageOpened()
+                .login(USERNAME, PASSWORD)
+                .isPageOpened();
+        headerPage
+                .clickBurgerMenu()
+                .isPageOpened()
+                .clickLogout()
+                .isPageOpened();
+    }
 }

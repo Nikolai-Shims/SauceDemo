@@ -24,8 +24,10 @@ public class BaseTest {
 
     @BeforeMethod
     public void before(ITestContext context) {
-      //System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
-      driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+      System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
+     // driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+        driver = new ChromeDriver();
+
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
@@ -34,7 +36,7 @@ public class BaseTest {
         itemPage = new ItemPage(driver);
         overviewPage = new OverviewPage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         context.setAttribute("driver",driver);
     }
 

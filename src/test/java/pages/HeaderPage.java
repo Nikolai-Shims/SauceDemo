@@ -14,7 +14,7 @@ public class HeaderPage extends BasePage {
     public static final By ALL_ITEMS = By.id("inventory_sidebar_link");
     public static final By SHOPPING_CART = By.id("shopping_cart_container");
     public static final By NUMBER_OF_ITEM = By.cssSelector(".fa-layers-counter.shopping_cart_badge");
-    public static final By CLOSE_BURGER_MENU = By.xpath("//button[text() = 'Close Menu']");
+    public static final By CLOSE_BURGER_MENU = By.cssSelector(".bm-cross-button");
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -45,9 +45,9 @@ public class HeaderPage extends BasePage {
     }
 
     @Step("Close Burger Menu")
-    public HeaderPage closeBurgerMenu() {
+    public ProductsPage closeBurgerMenu() {
         driver.findElement(CLOSE_BURGER_MENU).click();
-        return this;
+        return new ProductsPage(driver);
     }
 
     @Step("Transition to the Cart")
