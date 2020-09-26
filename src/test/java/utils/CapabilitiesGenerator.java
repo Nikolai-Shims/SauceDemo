@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
             ChromeOptions options = new ChromeOptions();
             String driverPath = "src/test/resources/webdrivers";
             String os = System.getProperty("os.name").toLowerCase();
-            //log.debug(("Operational system: " + os + "; Driver path: " + driverPath));
             if (os.contains("win")) {
                 System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver.exe");
             } else if (os.contains("mac")) {
