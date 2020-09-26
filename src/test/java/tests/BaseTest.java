@@ -24,9 +24,9 @@ public class BaseTest {
 
     @BeforeMethod
     public void before(ITestContext context) {
-      System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
-     // driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
-        driver = new ChromeDriver();
+     // System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver");
+     driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+        //driver = new ChromeDriver();
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
