@@ -10,7 +10,7 @@ import static org.testng.AssertJUnit.assertEquals;
 @Listeners(TestListener.class)
 public class HeaderTest extends BaseTest {
 
-    @Test(description = "Validate Burger Menu")
+    @Test(description = "Validate Burger Menu",retryAnalyzer = Retry.class)
     @Description("Check all function in Burger Menu")
     @Issue("shim_nikolai")
     public void validateBurgerMenu() {
@@ -32,7 +32,7 @@ public class HeaderTest extends BaseTest {
         assertEquals(cartPage.getCountItemInsideCart(), "0");
     }
 
-    @Test(description = "Go to all items")
+    @Test(description = "Go to all items",retryAnalyzer = Retry.class)
     @Description("Go to 'Products page' from cart by 'Burger menu'")
     @Issue("shim_nikolai")
     public void switchingAllItem() {
@@ -47,7 +47,7 @@ public class HeaderTest extends BaseTest {
     }
 
 
-    @Test(description = "Logout")
+    @Test(description = "Logout",retryAnalyzer = Retry.class)
     @Description("Login and Log out")
     @Issue("shim_nikolai")
     public void logOut() {
