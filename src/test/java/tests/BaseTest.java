@@ -2,9 +2,11 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
+import utils.CapabilitiesGenerator;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,9 +23,8 @@ public class BaseTest {
     OverviewPage overviewPage;
 
     @BeforeMethod
-    public void before() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        driver = new ChromeDriver();
+    public void before(ITestContext context) {
+     driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
@@ -32,7 +33,8 @@ public class BaseTest {
         itemPage = new ItemPage(driver);
         overviewPage = new OverviewPage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        context.setAttribute("driver",driver);
     }
 
     @AfterMethod(alwaysRun = true)

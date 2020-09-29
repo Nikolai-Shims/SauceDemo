@@ -1,13 +1,20 @@
 package tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+
+@Listeners(TestListener.class)
 public class ItemTest extends BaseTest {
 
 
-    @Test
+    @Test(description = "Return back to 'Products page'")
+    @Description("Transition from 'Item Page' to 'Products Page'")
+    @Issue("shim_nikolai")
     public void validateButtonBack() {
         loginPage
                 .openPage()
@@ -18,7 +25,9 @@ public class ItemTest extends BaseTest {
                 .isPageOpened();
     }
 
-    @Test
+    @Test(description = "Add and remove item")
+    @Description("Validate that item can be add and remove from 'Item Page'")
+    @Issue("shim_nikolai")
     public void addAndRemoveItem() {
         productsPage
                 .openPage()

@@ -1,16 +1,23 @@
 package tests;
 
-import org.testng.Assert;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
 
+@Listeners(TestListener.class)
 public class CheckoutTest extends BaseTest {
+
     public final static String FIRST_NAME = "Ivan";
     public final static String LAST_NAME = "Ivanov";
     public final static String ZIP_CODE = "1234";
 
-    @Test
+    @Test(description = "Go to 'Checkout Page'")
+    @Description("Go to 'Checkout Page' and validate that 'Checkout Page' was opened")
+    @Issue("shim_nikolai")
     public void checkoutButton() {
         loginPage
                 .openPage()
@@ -22,7 +29,9 @@ public class CheckoutTest extends BaseTest {
                 .isPageOpened();
     }
 
-    @Test
+    @Test(description = "Go to 'Checkout Page' and return back to 'Cart page'")
+    @Description("Go to 'Checkout Page' and return back to 'Cart page' and validate that 'Cart Page was opened'")
+    @Issue("shim_nikolai")
     public void cancelButton() {
         cartPage
                 .openPage()
@@ -33,7 +42,9 @@ public class CheckoutTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(description = "Fill Checkout information")
+    @Description("Fill Checkout information with correct data")
+    @Issue("shim_nikolai")
     public void fillCheckoutInformation() {
         cartPage
                 .openPage()
@@ -44,7 +55,9 @@ public class CheckoutTest extends BaseTest {
                 .isPageOpened();
     }
 
-    @Test
+    @Test(description = "Fill checkout information")
+    @Description("Fill Checkout information without data")
+    @Issue("shim_nikolai")
     public void validateErrorWithEmptyField() {
         cartPage
                 .openPage()
@@ -54,7 +67,9 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutPage.validateErrorMessage(), "Error: First Name is required");
     }
 
-    @Test
+    @Test(description = "Fill checkout information")
+    @Description("Fill Checkout information without 'Last Name' data")
+    @Issue("shim_nikolai")
     public void validateErrorWithEmptyLastName() {
         cartPage
                 .openPage()
@@ -64,7 +79,9 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutPage.validateErrorMessage(), "Error: Last Name is required");
     }
 
-    @Test
+    @Test(description = "Fill checkout information")
+    @Description("Fill Checkout information without 'Zip Code' data")
+    @Issue("shim_nikolai")
     public void validateErrorWithEmptyZipCode() {
         cartPage
                 .openPage()
@@ -74,7 +91,9 @@ public class CheckoutTest extends BaseTest {
         assertEquals(checkoutPage.validateErrorMessage(), "Error: Postal Code is required");
     }
 
-    @Test
+    @Test(description = "Complete order")
+    @Description("Go to through all steps")
+    @Issue("shim_nikolai")
     public void validateCompleteOrder() {
         loginPage
                 .openPage()
