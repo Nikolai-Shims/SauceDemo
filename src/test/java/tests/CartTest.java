@@ -14,10 +14,8 @@ public class CartTest extends BaseTest {
     @Description("Login to the cart and check that 'Cart Page' was opened")
     @Issue("shim_nikolai")
     public void logInToCart() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened();
+        loginSteps
+                .login(USERNAME,PASSWORD);
         cartPage
                 .openPage();
     }
@@ -26,10 +24,8 @@ public class CartTest extends BaseTest {
     @Description("Login to the cart and return back to the 'Products Page'")
     @Issue("shim_nikolai")
     public void clickButtonContinue() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened();
+        loginSteps
+                .login(USERNAME,PASSWORD);
         cartPage
                 .openPage()
                 .clickContinueShopping()
@@ -40,10 +36,9 @@ public class CartTest extends BaseTest {
     @Description("Add item to the Cart and validate that item was added")
     @Issue("shim_nikolai")
     public void addItemToCartAndValidate() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .clickButtonAddToCart("Sauce Labs Bike Light")
                 .clickButtonAddToCart("Sauce Labs Bolt T-Shirt");
         cartPage

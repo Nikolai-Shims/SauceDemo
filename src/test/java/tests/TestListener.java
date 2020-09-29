@@ -65,9 +65,6 @@ public class TestListener implements ITestListener {
             return null;
         } catch (IllegalStateException ex) {
             return null;
-        } catch (NullPointerException re) {
-            return null;
-
         }
     }
 
