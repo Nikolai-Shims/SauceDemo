@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 import pages.ProductsPage;
@@ -8,7 +9,6 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginSteps {
 
-    WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
 
@@ -17,6 +17,7 @@ public class LoginSteps {
         productsPage = new ProductsPage(driver);
     }
 
+    @Step("Open login page,fill login and check that products page was open")
     public LoginSteps login(String username, String password) {
         loginPage
                 .openPage()
@@ -26,6 +27,7 @@ public class LoginSteps {
         return this;
     }
 
+    @Step("Open login page and fill login window ")
     public LoginSteps validateLogin(String username,String password){
         loginPage
                 .openPage()
@@ -34,6 +36,7 @@ public class LoginSteps {
     return this;
     }
 
+    @Step("Validate error message, with incorrectly data")
     public LoginSteps validateErrorMessage(String errorMessage) {
         assertEquals(loginPage.getErrorMessage(),errorMessage,"Text doesn't same");
         return this;

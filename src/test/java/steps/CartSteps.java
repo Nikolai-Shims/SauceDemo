@@ -1,5 +1,6 @@
 package steps;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pages.CartPage;
 
@@ -13,7 +14,7 @@ public class CartSteps {
         cartPage = new CartPage(driver);
     }
 
-
+    @Step("Open cart, get count item inside cert and validate that")
     public CartSteps validateCountItemInsideCart(String count){
         cartPage
                 .openPage()
