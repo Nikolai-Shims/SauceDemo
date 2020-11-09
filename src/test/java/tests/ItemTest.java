@@ -16,10 +16,9 @@ public class ItemTest extends BaseTest {
     @Description("Transition from 'Item Page' to 'Products Page'")
     @Issue("shim_nikolai")
     public void validateButtonBack() {
-        loginPage
-                .openPage()
-                .isPageOpened()
-                .login(USERNAME, PASSWORD)
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .goToItemByLink("Sauce Labs Bolt T-Shirt")
                 .clickBack()
                 .isPageOpened();
@@ -34,21 +33,15 @@ public class ItemTest extends BaseTest {
                 .isPageOpened()
                 .goToItemByImage("Sauce Labs Bolt T-Shirt")
                 .clickAddToCartButton();
-        String getCountItem = cartPage
-                .openPage()
-                .isPageOpened()
-                .getCountItemInsideCart();
-        assertEquals(getCountItem, "1");
+        cartSteps
+                .validateCountItemInsideCart("1");
         productsPage
                 .openPage()
                 .isPageOpened()
                 .goToItemByLink("Sauce Labs Bolt T-Shirt")
                 .clickRemoveButton();
-        String countItem = cartPage
-                .openPage()
-                .isPageOpened()
-                .getCountItemInsideCart();
-        assertEquals(countItem, "0");
+        cartSteps
+                .validateCountItemInsideCart("0");
 
     }
 }

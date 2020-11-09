@@ -15,10 +15,9 @@ public class ProductsTest extends BaseTest {
     @Description("Select item by name and transition to 'Item Page'")
     @Issue("shim_nikolai")
     public void selectItemByName() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .goToItemByLink("Sauce Labs Bolt T-Shirt")
                 .isPageOpened();
     }
@@ -27,10 +26,9 @@ public class ProductsTest extends BaseTest {
     @Description("Select item by image and transition to 'Item Page'")
     @Issue("shim_nikolai")
     public void selectItemByImage() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .goToItemByImage("Sauce Labs Bolt T-Shirt")
                 .isPageOpened();
     }
@@ -39,10 +37,9 @@ public class ProductsTest extends BaseTest {
     @Description("Change sorting to 'Products Page'")
     @Issue("shim_nikolai")
     public void changeSorting() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .sortMenu("Price (high to low)")
                 .isPageOpened();
     }
@@ -51,22 +48,17 @@ public class ProductsTest extends BaseTest {
     @Description("Add item and remove ite from 'Products Page'")
     @Issue("shim_nikolai")
     public void AddItemToCartAndRemoveIt() {
-        loginPage
-                .openPage()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .clickButtonAddToCart("Sauce Labs Bolt T-Shirt");
-        String getCountItem = cartPage
-                .openPage()
-                .getCountItemInsideCart();
-        assertEquals(getCountItem, "1");
+        cartSteps
+                .validateCountItemInsideCart("1");
         productsPage
                 .openPage()
                 .clickButtonRemoveFromCart("Sauce Labs Bolt T-Shirt");
-        String countItem = cartPage
-                .openPage()
-                .getCountItemInsideCart();
-        assertEquals(countItem, "0");
+        cartSteps
+                .validateCountItemInsideCart("0");
     }
 
 

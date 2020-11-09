@@ -14,11 +14,9 @@ public class HeaderTest extends BaseTest {
     @Description("Check all function in Burger Menu")
     @Issue("shim_nikolai")
     public void validateBurgerMenu() {
-        loginPage
-                .openPage()
-                .isPageOpened()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened()
+        loginSteps
+                .login(USERNAME,PASSWORD);
+        productsPage
                 .clickButtonAddToCart("Test.allTheThings() T-Shirt (Red)");
         assertEquals(headerPage.getCountItemByShoppingCartBadge(), "1");
         headerPage
@@ -27,10 +25,8 @@ public class HeaderTest extends BaseTest {
                 .clickResetState()
                 .closeBurgerMenu()
                 .isPageOpened();
-        cartPage
-                .openPage()
-                .isPageOpened();
-        assertEquals(cartPage.getCountItemInsideCart(), "0");
+        cartSteps
+                .validateCountItemInsideCart("0");
     }
 
     @Test(description = "Go to all items",retryAnalyzer = Retry.class)
@@ -52,11 +48,8 @@ public class HeaderTest extends BaseTest {
     @Description("Login and Log out")
     @Issue("shim_nikolai")
     public void logOut() {
-        loginPage
-                .openPage()
-                .isPageOpened()
-                .login(USERNAME, PASSWORD)
-                .isPageOpened();
+        loginSteps
+                .login(USERNAME,PASSWORD);
         headerPage
                 .clickBurgerMenu()
                 .isPageOpened()
